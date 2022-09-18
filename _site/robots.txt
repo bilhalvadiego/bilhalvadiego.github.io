@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://diegobilhalva.github.io/sitemap.xml
