@@ -1,3 +1,464 @@
 ---
+title: Bilhalva's world
 layout: home
 ---
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diego Bilhalva - Currículo Interativo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Visualization & Content Choices:
+        - Hero: Name, Title, Tagline (HTML). Goal: Introduce.
+        - Sobre Mim: Detailed summary (HTML). Goal: Inform.
+        - Competências: Categorized lists with tags (HTML/CSS). Goal: Showcase Skills.
+        - Experiência: Vertical timeline (HTML/CSS). Goal: Detail Career. Chart (Tempo de Experiência por Empresa) using Chart.js. Goal: Visualize experience distribution. Interaction: Tooltips. Justification: Provides a quick visual summary of tenure.
+        - Formação, Idiomas, Certificações, Voluntariado: Lists (HTML). Goal: Inform.
+        - Contato: Clickable links (HTML). Goal: Enable Contact.
+        CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        html { scroll-behavior: smooth; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px; /* Adjusted for better display */
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px; /* Base height */
+            max-height: 500px; /* Max height */
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px; /* Smaller height on mobile */
+            }
+        }
+        .nav-link.active {
+            color: #0284c7; /* sky-600 */
+            font-weight: 600;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px; /* Adjust to center the dot on the line */
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #0284c7; /* sky-600 */
+            border: 2px solid white;
+            z-index: 1;
+        }
+        .timeline-line {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #cbd5e1; /* slate-300 */
+        }
+         body {
+            font-family: 'Inter', sans-serif; /* Ensuring Inter font */
+        }
+        /* Custom scrollbar for a cleaner look - Optional */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9; /* slate-100 */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #64748b; /* slate-500 */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569; /* slate-600 */
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-slate-50 text-slate-700">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap justify-between items-center">
+            <a href="#inicio" class="text-2xl font-bold text-sky-600">Diego Bilhalva</a>
+            <button id="nav-toggle" class="md:hidden text-slate-600 hover:text-sky-600 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+            <ul id="nav-menu" class="w-full md:w-auto md:flex space-y-2 md:space-y-0 md:space-x-6 mt-4 md:mt-0 hidden">
+                <li><a href="#inicio" class="nav-link block py-2 md:py-0 text-slate-600 hover:text-sky-600">Início</a></li>
+                <li><a href="#sobre" class="nav-link block py-2 md:py-0 text-slate-600 hover:text-sky-600">Sobre Mim</a></li>
+                <li><a href="#competencias" class="nav-link block py-2 md:py-0 text-slate-600 hover:text-sky-600">Competências</a></li>
+                <li><a href="#experiencia" class="nav-link block py-2 md:py-0 text-slate-600 hover:text-sky-600">Experiência</a></li>
+                <li><a href="#formacao" class="nav-link block py-2 md:py-0 text-slate-600 hover:text-sky-600">Formação</a></li>
+                <li><a href="#outros" class="nav-link block py-2 md:py-0 text-slate-600 hover:text-sky-600">Outros</a></li>
+                <li><a href="#contato" class="nav-link block py-2 md:py-0 text-slate-600 hover:text-sky-600">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" class="min-h-[calc(100vh-68px)] flex items-center justify-center bg-gradient-to-br from-sky-50 via-slate-50 to-sky-100 py-20 px-4 text-center">
+            <div class="max-w-3xl">
+                <h1 class="text-5xl md:text-6xl font-bold text-sky-700 mb-4">Diego Bilhalva</h1>
+                <p class="text-2xl md:text-3xl text-slate-600 mb-8">Data Analytics Expert | Arquiteto de Soluções de Dados e Automação</p>
+                <p class="text-lg text-slate-500 mb-10">Transformando dados em valor, entregando soluções robustas e inovadoras que geram impacto real nos negócios.</p>
+                <a href="#sobre" class="bg-sky-600 text-white font-semibold px-8 py-3 rounded-lg hover:bg-sky-700 transition duration-300 text-lg">Conheça Mais</a>
+            </div>
+        </section>
+
+        <section id="sobre" class="py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-sky-700 mb-6">Sobre Mim</h2>
+                <p class="text-lg text-center text-slate-600 mb-12 max-w-3xl mx-auto">Esta seção fornece uma visão geral da minha jornada profissional, destacando experiências chave, habilidades e minha abordagem à análise de dados e automação.</p>
+                <div class="bg-white p-8 rounded-xl shadow-xl max-w-4xl mx-auto">
+                    <p class="text-lg text-slate-700 leading-relaxed">
+                        Profissional com mais de 20 anos de trajetória consolidada na área de dados e inteligência analítica, atuando como Arquiteto de Soluções de Dados e Automação na Unidade de Inteligência Analítica do Banco do Brasil. Sou um especialista em engenharia de dados e ciência de dados, com um histórico comprovado na liderança de projetos estratégicos que impulsionam a inteligência analítica e otimizam processos críticos, como a recuperação de crédito. Minha expertise abrange o desenvolvimento e otimização de pipelines de dados escaláveis em ambientes on-premise e cloud, utilizando tecnologias de ponta como Python, PySpark, Hadoop, Apache Airflow. Minha proficiência se estende à integração de RPA com inteligência artificial para hyperautomation, aplicando modelagem estatística e machine learning para embasar decisões estratégicas. Paralelamente, atuo como instrutor e mentor em Data Science & Analytics, capacitando profissionais e fortalecendo a cultura de dados no mercado. Minha paixão é transformar dados em valor, entregando soluções robustas e inovadoras que geram impacto real nos negócios.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="competencias" class="py-16 md:py-24 bg-slate-100">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-sky-700 mb-6">Competências</h2>
+                 <p class="text-lg text-center text-slate-600 mb-12 max-w-3xl mx-auto">Aqui você encontrará uma lista categorizada das minhas habilidades técnicas e metodológicas, demonstrando a amplitude e profundidade da minha expertise na área de dados.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-sky-600 mb-4">Big Data & Analytics</h3>
+                        <ul class="space-y-2">
+                            <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">Big Data - Análise de Big Data</li>
+                            <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">Arquitetura e Engenharia de Dados</li>
+                            <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">Data Storytelling</li>
+                            <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">Análise Preditiva</li>
+                            <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">Ciência de Dados</li>
+                            <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">Modelagem Estatística</li>
+                            <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">Machine Learning</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-sky-600 mb-4">Plataformas & Ferramentas</h3>
+                        <ul class="space-y-2">
+                            <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">Python, PySpark, Hadoop</li>
+                            <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">Cloud Computing (Ecossistema AWS, Azure)</li>
+                            <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">Databricks SQL, Databricks Data Science</li>
+                            <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">Spark Databricks</li>
+                            <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">Apache Airflow</li>
+                             <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">Power BI, DAX, Power Query M</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-sky-600 mb-4">Automação & Processos</h3>
+                        <ul class="space-y-2">
+                            <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">Hyperautomation (RPA com IA)</li>
+                            <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">UiPath, AutoIt</li>
+                            <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">Consultoria em Processos de BI</li>
+                            <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">Planejamento e Estratégia de Recuperação de Crédito</li>
+                        </ul>
+                    </div>
+                    <div class="md:col-span-1 lg:col-span-1">
+                        <h3 class="text-xl font-semibold text-sky-600 mb-4">Metodologias & Certificações</h3>
+                        <ul class="space-y-2">
+                             <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">Certified Business Analysis Professional™ (CBAP)</li>
+                             <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">ITIL Foundation V3</li>
+                             <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">CSM</li>
+                             <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">Tech Leader</li>
+                        </ul>
+                    </div>
+                     <div class="md:col-span-1 lg:col-span-1">
+                        <h3 class="text-xl font-semibold text-sky-600 mb-4">Outras</h3>
+                        <ul class="space-y-2">
+                            <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">Bioinformática</li>
+                            <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">Liderança Técnica</li>
+                            <li class="bg-white p-3 rounded-md shadow-sm text-slate-700">Modelagem de Dados</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experiencia" class="py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-sky-700 mb-6">Experiência Profissional</h2>
+                <p class="text-lg text-center text-slate-600 mb-12 max-w-3xl mx-auto">Explore minha trajetória profissional através de uma linha do tempo cronológica. Cada entrada detalha minhas responsabilidades e contribuições. Esta seção também inclui um gráfico visualizando minha experiência ao longo do tempo nas organizações.</p>
+                <div class="relative max-w-3xl mx-auto">
+                    <div class="timeline-line hidden sm:block"></div>
+                    <div class="space-y-12">
+                        
+                        <div class="timeline-item relative pl-8 sm:pl-12 py-4">
+                            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-sky-500">
+                                <h3 class="text-xl font-semibold text-sky-600 mb-1">Data Analytics Expert @ Banco do Brasil</h3>
+                                <p class="text-sm text-slate-500 mb-3">Janeiro de 2023 – Presente (Porto Alegre, RS)</p>
+                                <ul class="list-disc list-inside text-slate-600 space-y-1 text-sm">
+                                    <li>Arquiteto de Soluções de Dados e Automação na Unidade de Inteligência Analítica.</li>
+                                    <li>Liderança técnica em projetos estratégicos para ciência e engenharia de dados em recuperação de crédito e capacitação em Big Data/Analytics.</li>
+                                    <li>Desenvolvimento e otimização de pipelines de dados (on-premise/cloud).</li>
+                                    <li>Definição de padrões para times de dados e automação.</li>
+                                    <li>Integração de RPA com IA para eficiência operacional.</li>
+                                    <li>Modelagem estatística e machine learning para decisões estratégicas.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item relative pl-8 sm:pl-12 py-4">
+                            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-sky-500">
+                                <h3 class="text-xl font-semibold text-sky-600 mb-1">Data Solutions Architect @ Cast group</h3>
+                                <p class="text-sm text-slate-500 mb-3">Janeiro de 2023 – Presente (Brasília, DF)</p>
+                                <ul class="list-disc list-inside text-slate-600 space-y-1 text-sm">
+                                    <li>Liderança técnica em projetos para o Banco do Brasil (recuperação de crédito, capacitação em Big Data/Analytics).</li>
+                                    <li>Desenvolvimento de arquiteturas de dados escaláveis (PySpark, Hadoop, cloud).</li>
+                                    <li>Definição de padrões de automação e governança de dados.</li>
+                                    <li>Integração de Data Analytics e RPA para processos críticos.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item relative pl-8 sm:pl-12 py-4">
+                            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-sky-500">
+                                <h3 class="text-xl font-semibold text-sky-600 mb-1">Professor de Data Science e Data & Analytics @ TargetTrust</h3>
+                                <p class="text-sm text-slate-500 mb-3">Janeiro de 2022 – Setembro de 2023 (Remoto)</p>
+                                <p class="text-slate-600 text-sm">Instrutor nas formações de Ciência de Dados, Análise de Dados e Análise de Negócios em ambientes digitais.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item relative pl-8 sm:pl-12 py-4">
+                            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-sky-500">
+                                <h3 class="text-xl font-semibold text-sky-600 mb-1">Business Intelligence Expert @ iFood</h3>
+                                <p class="text-sm text-slate-500 mb-3">Maio de 2022 – Dezembro de 2022 (Remoto)</p>
+                                <ul class="list-disc list-inside text-slate-600 space-y-1 text-sm">
+                                    <li>Geração de insights para identificar comportamentos de fraudadores.</li>
+                                    <li>Ferramentas: Estatística, Python, Databricks SQL/Data Science, PySpark, Pandas, Numpy, SKLearn, etc.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item relative pl-8 sm:pl-12 py-4">
+                            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-sky-500">
+                                <h3 class="text-xl font-semibold text-sky-600 mb-1">Sr. Business Data Expert @ Compass.uol</h3>
+                                <p class="text-sm text-slate-500 mb-3">Outubro de 2021 – Abril de 2022 (Porto Alegre, RS)</p>
+                                 <ul class="list-disc list-inside text-slate-600 space-y-1 text-sm">
+                                    <li>Líder técnico na concepção e implantação de Delta Lake em Microsoft Azure.</li>
+                                    <li>Concepção de produto, elicitação de requisitos, desenvolvimento de camada semântica e painéis em PowerBI.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item relative pl-8 sm:pl-12 py-4">
+                            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-sky-500">
+                                <h3 class="text-xl font-semibold text-sky-600 mb-1">Sr. Business Data Analyst @ Sicredi</h3>
+                                <p class="text-sm text-slate-500 mb-3">Dezembro de 2011 – Setembro de 2021 (Porto Alegre, RS)</p>
+                                <ul class="list-disc list-inside text-slate-600 space-y-1 text-sm">
+                                    <li>10 anos em projetos de inteligência de negócios.</li>
+                                    <li>Liderança técnica em Data & Analytics (IA), dashboards, soluções de crédito/risco/ouvidoria.</li>
+                                    <li>Pioneirismo em CoE de RPA (UiPath) e soluções RPA + IA (IBM Watson).</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        </div>
+                </div>
+
+                <div class="mt-16">
+                    <h3 class="text-2xl md:text-3xl font-semibold text-slate-700 mb-8 text-center">Tempo de Experiência por Empresa (Anos)</h3>
+                    <div class="chart-container bg-white p-4 sm:p-6 rounded-xl shadow-xl">
+                        <canvas id="experienceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="formacao" class="py-16 md:py-24 bg-slate-100">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-sky-700 mb-6">Formação Acadêmica</h2>
+                <p class="text-lg text-center text-slate-600 mb-12 max-w-3xl mx-auto">Esta área lista minhas qualificações acadêmicas e estudos em andamento, demonstrando meu compromisso com o aprendizado contínuo e especialização.</p>
+                <div class="max-w-3xl mx-auto space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-semibold text-sky-600">MBA em Engenharia de Dados</h3>
+                        <p class="text-slate-600">UFRJ - Universidade Federal do Rio de Janeiro</p>
+                        <p class="text-sm text-slate-500">Março de 2025 – Março de 2026</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-semibold text-sky-600">Master of Philosophy - MPhil, Biomathematics, Bioinformatics, and Computational Biology</h3>
+                        <p class="text-slate-600">Faculdade Israelita Albert Einstein</p>
+                        <p class="text-sm text-slate-500">Dezembro de 2024 – Dezembro de 2026</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-semibold text-sky-600">Bacharelado em Ciências Biológicas, Biomatemática, Bioinformática e Biologia Computacional</h3>
+                        <p class="text-slate-600">Universidade do Vale do Rio dos Sinos</p>
+                        <p class="text-sm text-slate-500">Agosto de 2023 – Junho de 2027</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-semibold text-sky-600">Tecnólogo em Gestão de Cooperativas</h3>
+                        <p class="text-slate-600">Faculdade de Tecnologia do Cooperativismo</p>
+                        <p class="text-sm text-slate-500">Fevereiro de 2019 – Junho de 2021</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-semibold text-sky-600">Bacharelado em Estatística (incompleto)</h3>
+                        <p class="text-slate-600">Universidade Federal do Rio Grande do Sul</p>
+                        <p class="text-sm text-slate-500">2000 – 2003</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="outros" class="py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-sky-700 mb-6">Idiomas, Certificações e Voluntariado</h2>
+                <p class="text-lg text-center text-slate-600 mb-12 max-w-3xl mx-auto">Descubra minhas proficiências em idiomas, certificações profissionais que validam minhas habilidades e meu envolvimento em atividades voluntárias.</p>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-semibold text-sky-600 mb-3">Idiomas</h3>
+                        <ul class="space-y-1 text-slate-600">
+                            <li>Espanhol (Proficiência Plena)</li>
+                            <li>Inglês (Proficiência Profissional)</li>
+                            <li>Italiano (Proficiência Limitada)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-semibold text-sky-600 mb-3">Certificações Principais</h3>
+                        <ul class="space-y-1 text-slate-600">
+                            <li>Big Data & Advanced Analytics</li>
+                            <li>Certified Business Analysis Professional™ (CBAP)</li>
+                            <li>ITIL Foundation V3</li>
+                            <li>CSM, Tech Leader, Data & Analytics</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-semibold text-sky-600 mb-3">Trabalho Voluntário</h3>
+                        <p class="text-slate-600">Resgate, encaminhamento e cuidados de animais abandonados ou em situação de riscos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="py-16 md:py-24 bg-sky-600 text-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Entre em Contato</h2>
+                <p class="text-lg mb-8 max-w-2xl mx-auto">Estou aberto a novas oportunidades e colaborações. Sinta-se à vontade para entrar em contato.</p>
+                <div class="space-y-4 md:space-y-0 md:flex md:justify-center md:space-x-8">
+                    <a href="mailto:bilhalvadiego@outlook.com" class="inline-block bg-white text-sky-600 font-semibold px-6 py-3 rounded-lg hover:bg-sky-50 transition duration-300">
+                        bilhalvadiego@outlook.com
+                    </a>
+                    <a href="tel:+5551995612008" class="inline-block bg-white text-sky-600 font-semibold px-6 py-3 rounded-lg hover:bg-sky-50 transition duration-300">
+                        +55 51 99561-2008
+                    </a>
+                    <a href="https://www.linkedin.com/in/diegobilhalva" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-sky-600 font-semibold px-6 py-3 rounded-lg hover:bg-sky-50 transition duration-300">
+                        LinkedIn
+                    </a>
+                     <a href="https://diegobilhalva.com" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-sky-600 font-semibold px-6 py-3 rounded-lg hover:bg-sky-50 transition duration-300">
+                        Blog Pessoal
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center py-8 bg-slate-800 text-slate-300">
+        <p>&copy; <span id="currentYear"></span> Diego Bilhalva. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile navigation toggle
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function () {
+                    navMenu.classList.toggle('hidden');
+                });
+            }
+
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Active navigation link highlighting on scroll
+            const sections = document.querySelectorAll('main section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            function changeNav() {
+                let index = sections.length;
+                while(--index && window.scrollY + 100 < sections[index].offsetTop) {} // 100 is an offset
+                
+                navLinks.forEach((link) => link.classList.remove('active'));
+                if (navLinks[index]) {
+                    navLinks[index].classList.add('active');
+                }
+            }
+            changeNav(); // Initial call
+            window.addEventListener('scroll', changeNav);
+
+            // Close mobile menu on link click
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navMenu && !navMenu.classList.contains('md:flex')) { // only if mobile menu is active
+                         navMenu.classList.add('hidden');
+                    }
+                });
+            });
+            
+            // Chart.js for Experience
+            const experienceData = {
+                labels: ['Atendebem', 'Top Service', 'Redebrasil', 'CENTRIX', 'Dlima', 'Sicredi', 'Compass.uol', 'iFood', 'TargetTrust', 'Cast group', 'Banco do Brasil'],
+                datasets: [{
+                    label: 'Anos de Experiência',
+                    data: [5.5, 1.42, 2.42, 0.33, 0.58, 9.83, 0.58, 0.67, 1.75, 2.4, 2.4], // Approximate years, "Present" calculated as ~2.4 years up to May 2025
+                    backgroundColor: 'rgba(2, 132, 199, 0.7)', // sky-600 with opacity
+                    borderColor: 'rgba(2, 132, 199, 1)', // sky-600
+                    borderWidth: 1,
+                    borderRadius: 4,
+                }]
+            };
+
+            const experienceChartCtx = document.getElementById('experienceChart');
+            if (experienceChartCtx) {
+                new Chart(experienceChartCtx, {
+                    type: 'bar',
+                    data: experienceData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Anos'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Empresa'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false // Hiding legend as it's clear from title
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += context.parsed.y + ' anos';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
